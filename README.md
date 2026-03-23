@@ -239,6 +239,7 @@ Connect nanobot to your favorite chat platform. Want to build your own? See the 
 | **Telegram** | Bot token from @BotFather |
 | **Discord** | Bot token + Message Content intent |
 | **WhatsApp** | QR code scan |
+| **WeChat** | QR code scan |
 | **Feishu** | App ID + App Secret |
 | **Mochat** | Claw token (auto-setup available) |
 | **DingTalk** | App Key + App Secret |
@@ -492,6 +493,54 @@ nanobot gateway
 > WhatsApp bridge updates are not applied automatically for existing installations.
 > After upgrading nanobot, rebuild the local bridge with:
 > `rm -rf ~/.nanobot/bridge && nanobot channels login`
+
+</details>
+
+<details>
+<summary><b>WeChat (微信)</b></summary>
+
+Uses **Tencent iLink Bot API** — official, legal WeChat bot integration.
+
+**1. Configure**
+
+```json
+{
+  "channels": {
+    "weixin": {
+      "enabled": true,
+      "base_url": "https://ilinkai.weixin.qq.com",
+      "allowFrom": ["*"]
+    }
+  }
+}
+```
+
+> `allowFrom`: Add user IDs to allow (find in logs when user messages bot). Use `["*"]` to allow all users.
+
+**2. Run and scan QR code**
+
+```bash
+nanobot gateway
+```
+
+Follow the on-screen instructions:
+1. Wait for QR code to appear in terminal
+2. Open WeChat on your phone
+3. Scan QR code with WeChat
+4. Confirm login
+
+The bot will save your login token to `~/.nanobot/.weixin-token.json` for automatic reconnection.
+
+**3. Start chatting**
+
+Send a message to the bot in WeChat — it should respond!
+
+**Features:**
+- Text messages
+- Images, videos, files, voice messages
+- AES-128-ECB media encryption
+- Token persistence for automatic login
+- Long-poll message monitoring
 
 </details>
 
